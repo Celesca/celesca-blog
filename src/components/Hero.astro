@@ -1,0 +1,143 @@
+---
+export interface Props {
+  imageSrc: string;
+  quote: string;
+  cvUrl?: string;
+}
+
+const { imageSrc, quote, cvUrl = "/resume.pdf" } = Astro.props;
+---
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="profile-container">
+      <img src={imageSrc} alt="Profile" class="profile-image" />
+      <div class="gradient-circle"></div>
+    </div>
+    <div class="info">
+      <h1>Hi, I'm <span class="highlight">Celesca</span></h1>
+      <p class="quote">"{quote}"</p>
+      <a href={cvUrl} download class="cv-button">
+        <span>Download CV</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    padding: 2rem 0;
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 3rem;
+  }
+
+  .profile-container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+  }
+
+  .profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  }
+
+  .gradient-circle {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 15px;
+    left: 15px;
+    border-radius: 20px;
+    background: var(--gradient);
+    z-index: 1;
+  }
+
+  .info {
+    flex: 1;
+  }
+
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .highlight {
+    color: var(--primary);
+    position: relative;
+    display: inline-block;
+  }
+
+  .highlight::after {
+    content: "";
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background-color: rgba(255, 204, 0, 0.3);
+    z-index: -1;
+  }
+
+  .quote {
+    font-size: 1.2rem;
+    font-style: italic;
+    margin-bottom: 2rem;
+    color: #666;
+    line-height: 1.6;
+  }
+
+  .cv-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--gradient);
+    color: white;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(255, 149, 0, 0.3);
+  }
+
+  .cv-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(255, 149, 0, 0.4);
+    color: white;
+  }
+
+  @media (max-width: 768px) {
+    .hero-content {
+      flex-direction: column;
+      text-align: center;
+      gap: 2rem;
+    }
+    
+    .profile-container {
+      width: 250px;
+      height: 250px;
+    }
+    
+    h1 {
+      font-size: 2.5rem;
+    }
+  }
+</style>

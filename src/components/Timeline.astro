@@ -1,0 +1,156 @@
+---
+export interface Props {
+  experiences: {
+    title: string;
+    company: string;
+    duration: string;
+    description?: string;
+  }[];
+}
+
+const { experiences } = Astro.props;
+---
+
+<div class="timeline">
+  {experiences.map((exp: Props['experiences'][number], index: number) => (
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <h3>{exp.title}</h3>
+        <h4>{exp.company}</h4>
+        <div class="timeline-date">{exp.duration}</div>
+        {exp.description && <p>{exp.description}</p>}
+      </div>
+    </div>
+  ))}
+</div>
+
+<style>
+  .timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 0;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    width: 4px;
+    background: var(--gradient);
+    top: 0;
+    bottom: 0;
+    left: 20px;
+    margin-left: -2px;
+    border-radius: 4px;
+  }
+
+  .timeline-item {
+    padding-left: 3rem;
+    position: relative;
+    margin-bottom: 3rem;
+  }
+
+  .timeline-dot {
+    position: absolute;
+    left: 16px;
+    width: 16px;
+    height: 16px;
+    transform: translateX(-50%);
+    background: white;
+    border: 3px solid var(--primary);
+    border-radius: 50%;
+    z-index: 1;
+  }
+
+  .timeline-content {
+    padding: 1.5rem;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    position: relative;
+    transition: transform 0.3s ease;
+  }
+
+  .timeline-content:hover {
+    transform: translateY(-3px);
+  }
+
+  .timeline-content::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: white;
+    transform: rotate(45deg);
+    left: -10px;
+    top: 15px;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+  }
+
+  h4 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+
+  .timeline-date {
+    display: inline-block;
+    padding: 0.3rem 0.7rem;
+    background-color: rgba(255, 149, 0, 0.1);
+    border-radius: 20px;
+    color: var(--primary);
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+
+  p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #555;
+  }
+
+  @media (min-width: 768px) {
+    .timeline::before {
+      left: 50%;
+    }
+
+    .timeline-item {
+      padding-left: 0;
+      margin-bottom: 4rem;
+    }
+
+    .timeline-item:nth-child(odd) {
+      padding-right: 50%;
+      padding-left: 0;
+    }
+
+    .timeline-item:nth-child(even) {
+      padding-left: 50%;
+      padding-right: 0;
+    }
+
+    .timeline-dot {
+      left: 50%;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-content::before {
+      left: auto;
+      right: -10px;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-content {
+      margin-right: 2rem;
+    }
+
+    .timeline-item:nth-child(even) .timeline-content {
+      margin-left: 2rem;
+    }
+  }
+</style>
