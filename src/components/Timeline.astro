@@ -15,10 +15,11 @@ const { experiences } = Astro.props;
 <div class="timeline">
   {experiences.map((exp: Props['experiences'][number], index: number) => (
     <div class="timeline-item">
-      <div class="timeline-dot">
-        <img src={exp.picture} alt={exp.company} class="company-logo" loading="lazy" />
-      </div>
+      <div class="timeline-dot"></div>
       <div class="timeline-content">
+        <div class="company-logo-container">
+  <img src={exp.picture} alt={exp.company} class="company-logo" loading="lazy" />
+</div>
         <h3>{exp.title}</h3>
         <h4>{exp.company}</h4>
         <div class="timeline-date">{exp.duration}</div>
@@ -57,23 +58,13 @@ const { experiences } = Astro.props;
   .timeline-dot {
     position: absolute;
     left: 16px;
-    width: 40px;
-    height: 40px;
+    width: 16px;
+    height: 16px;
     transform: translateX(-50%);
     background: white;
     border: 3px solid var(--primary);
     border-radius: 50%;
     z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-
-  .company-logo {
-    height: 30px;
-    width: auto;
-    object-fit: contain;
   }
 
   .timeline-content {
@@ -84,6 +75,19 @@ const { experiences } = Astro.props;
     position: relative;
     transition: transform 0.3s ease;
   }
+
+  .company-logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.company-logo {
+  height: 30px;
+  width: auto;
+  object-fit: contain;
+}
 
   .timeline-content:hover {
     transform: translateY(-3px);
@@ -151,12 +155,6 @@ const { experiences } = Astro.props;
 
     .timeline-dot {
       left: 50%;
-      width: 50px;
-      height: 50px;
-    }
-
-    .company-logo {
-      height: 30px;
     }
 
     .timeline-item:nth-child(odd) .timeline-content::before {
