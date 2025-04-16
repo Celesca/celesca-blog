@@ -15,9 +15,10 @@ const { experiences } = Astro.props;
 <div class="timeline">
   {experiences.map((exp: Props['experiences'][number], index: number) => (
     <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="timeline-content">
+      <div class="timeline-dot">
         <img src={exp.picture} alt={exp.company} class="company-logo" loading="lazy" />
+      </div>
+      <div class="timeline-content">
         <h3>{exp.title}</h3>
         <h4>{exp.company}</h4>
         <div class="timeline-date">{exp.duration}</div>
@@ -56,13 +57,23 @@ const { experiences } = Astro.props;
   .timeline-dot {
     position: absolute;
     left: 16px;
-    width: 16px;
-    height: 16px;
+    width: 40px;
+    height: 40px;
     transform: translateX(-50%);
     background: white;
     border: 3px solid var(--primary);
     border-radius: 50%;
     z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .company-logo {
+    height: 30px;
+    width: auto;
+    object-fit: contain;
   }
 
   .timeline-content {
@@ -140,6 +151,12 @@ const { experiences } = Astro.props;
 
     .timeline-dot {
       left: 50%;
+      width: 50px;
+      height: 50px;
+    }
+
+    .company-logo {
+      height: 30px;
     }
 
     .timeline-item:nth-child(odd) .timeline-content::before {
