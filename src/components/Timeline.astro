@@ -1,7 +1,7 @@
 ---
 export interface Props {
   experiences: {
-    picture?: string;
+    picture: string;
     title: string;
     company: string;
     duration: string;
@@ -15,14 +15,9 @@ const { experiences } = Astro.props;
 <div class="timeline">
   {experiences.map((exp: Props['experiences'][number], index: number) => (
     <div class="timeline-item">
-      <div class="timeline-dot">
-        {exp.picture && (
-          <div class="company-logo-container">
-            <img src={exp.picture} alt={exp.company} class="company-logo" />
-          </div>
-        )}
-      </div>
+      <div class="timeline-dot"></div>
       <div class="timeline-content">
+        <img src={exp.picture} alt={exp.company} class="company-logo" loading="lazy" />
         <h3>{exp.title}</h3>
         <h4>{exp.company}</h4>
         <div class="timeline-date">{exp.duration}</div>
@@ -61,31 +56,13 @@ const { experiences } = Astro.props;
   .timeline-dot {
     position: absolute;
     left: 16px;
-    width: 40px;
-    height: 40px;
+    width: 16px;
+    height: 16px;
     transform: translateX(-50%);
     background: white;
     border: 3px solid var(--primary);
     border-radius: 50%;
     z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-
-  .company-logo-container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .company-logo {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
   }
 
   .timeline-content {
@@ -163,8 +140,6 @@ const { experiences } = Astro.props;
 
     .timeline-dot {
       left: 50%;
-      width: 60px;
-      height: 60px;
     }
 
     .timeline-item:nth-child(odd) .timeline-content::before {
