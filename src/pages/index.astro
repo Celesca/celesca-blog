@@ -5,12 +5,14 @@ import Timeline from '../components/Timeline.astro';
 
 const experiences = [
     { 
+      picture: "/companies/scb.png", // Add your company logos here
       title: 'Software Engineer Intern', 
       company: 'Company A', 
       duration: 'June 2022 - August 2022',
       description: 'Worked on developing new features for the company\'s main product using React and Node.js. Collaborated with a team of 5 developers.'
     },
     { 
+      picture: "/companies/scg.png", // Add your company logos here
       title: 'Frontend Developer Intern', 
       company: 'Company B', 
       duration: 'January 2023 - March 2023',
@@ -31,26 +33,5 @@ const experiences = [
 </Layout>
 
 <style>
-.section {
-  padding: 5rem 0;
-}
-
-.section-title {
-  position: relative;
-  font-size: 2.5rem;
-  margin-bottom: 3rem;
-  text-align: center;
-}
-
-.section-title::after {
-  content: "";
-  position: absolute;
-  bottom: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
-  height: 4px;
-  background: var(--gradient);
-  border-radius: 2px;
-}
+// ...existing styles...
 </style>
